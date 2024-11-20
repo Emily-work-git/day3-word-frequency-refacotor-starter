@@ -11,14 +11,9 @@ public class WordFrequencyGame {
             return sentences + " 1";
         } else {
             try {
-                //split the input string with 1 to n pieces of spaces
                 String[] words = sentences.split(SPACE);
-
                 List<WordFrequency> wordFrequencies = Arrays.stream(words).map(word -> new WordFrequency(word, 1)).toList();
-
-                //get the map for the next step of sizing the same word
                 wordFrequencies = getWordFrequencies(wordFrequencies);
-
                 return formatWordFrequencyResponse(wordFrequencies);
             } catch (Exception e) {
                 return ERROR_MESSAGE;
@@ -47,8 +42,4 @@ public class WordFrequencyGame {
         return wordFrequencyList.stream()
                 .collect(Collectors.groupingBy(WordFrequency::getValue));
     }
-
-    //extract method to:
-        //getWordFrequencies
-        //getWordFrequencyList
 }
