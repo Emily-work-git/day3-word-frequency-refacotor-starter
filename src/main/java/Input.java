@@ -2,9 +2,9 @@ public class Input {
     private String value;
     private int count;
 
-    public Input(String w, int i){
-        this.value =w;
-        this.count =i;
+    public Input(String w, int i) {
+        this.value = w;
+        this.count = i;
     }
 
 
