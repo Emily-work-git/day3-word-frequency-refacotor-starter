@@ -19,13 +19,17 @@ public class WordFrequencyGame {
                 //get the map for the next step of sizing the same word
                 wordFrequencies = getWordFrequencies(wordFrequencies);
 
-                StringJoiner joiner = new StringJoiner(LINE_BREAK);
-                wordFrequencies.stream().map(word -> word.getValue()+" "+word.getWordCount()).forEach(joiner::add);
-                return joiner.toString();
+                return formatWordFrequencyResponse(wordFrequencies);
             } catch (Exception e) {
                 return ERROR_MESSAGE;
             }
         }
+    }
+
+    private static String formatWordFrequencyResponse(List<WordFrequency> wordFrequencies) {
+        StringJoiner joiner = new StringJoiner(LINE_BREAK);
+        wordFrequencies.stream().map(word -> word.getValue()+" "+word.getWordCount()).forEach(joiner::add);
+        return joiner.toString();
     }
 
     private List<WordFrequency> getWordFrequencies(List<WordFrequency> wordFrequencies) {
