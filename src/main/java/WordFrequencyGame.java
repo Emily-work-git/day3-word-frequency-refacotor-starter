@@ -17,13 +17,7 @@ public class WordFrequencyGame {
                 List<WordFrequency> wordFrequencies = Arrays.stream(words).map(word -> new WordFrequency(word, 1)).toList();
 
                 //get the map for the next step of sizing the same word
-                Map<String, List<WordFrequency>> wordToWordFrequencyMap = getListMap(wordFrequencies);
-
-                wordFrequencies =  wordToWordFrequencyMap.entrySet()
-                        .stream()
-                        .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size())).
-                        sorted((word1, word2) -> word2.getWordCount() - word1.getWordCount())
-                        .collect(Collectors.toList());
+                wordFrequencies = getWordFrequencies(wordFrequencies);
 
                 StringJoiner joiner = new StringJoiner(LINE_BREAK);
                 wordFrequencies.stream().map(word -> word.getValue()+" "+word.getWordCount()).forEach(joiner::add);
@@ -33,6 +27,18 @@ public class WordFrequencyGame {
             }
         }
     }
+
+    private List<WordFrequency> getWordFrequencies(List<WordFrequency> wordFrequencies) {
+        Map<String, List<WordFrequency>> wordToWordFrequencyMap = getListMap(wordFrequencies);
+
+        wordFrequencies =  wordToWordFrequencyMap.entrySet()
+                .stream()
+                .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size())).
+                sorted((word1, word2) -> word2.getWordCount() - word1.getWordCount())
+                .collect(Collectors.toList());
+        return wordFrequencies;
+    }
+
 
     private Map<String, List<WordFrequency>> getListMap(List<WordFrequency> wordFrequencyList) {
         Map<String, List<WordFrequency>> map = new HashMap<>();
@@ -50,7 +56,6 @@ public class WordFrequencyGame {
     }
 
 
-    //convert for loop to stream
     //extract method to:
         //getWordFrequencies
         //getWordFrequencyList
