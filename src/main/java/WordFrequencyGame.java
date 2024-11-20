@@ -1,8 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class WordFrequencyGame {
     public static final String SPACE = "\\s+";
@@ -18,10 +14,11 @@ public class WordFrequencyGame {
                 String[] words = sentences.split(SPACE);
 
                 List<WordFrequency> wordFrequencies = new ArrayList<>();
-                for (String word : words) {
-                    WordFrequency wordFrequency = new WordFrequency(word, 1);
-                    wordFrequencies.add(wordFrequency);
-                }
+                wordFrequencies = Arrays.stream(words).map(word -> new WordFrequency(word, 1)).toList();
+//                for (String word : words) {
+//                    WordFrequency wordFrequency = new WordFrequency(word, 1);
+//                    wordFrequencies.add(wordFrequency);
+//                }
 
                 //get the map for the next step of sizing the same word
                 Map<String, List<WordFrequency>> wordToWordFrequencyMap = getListMap(wordFrequencies);
@@ -62,4 +59,10 @@ public class WordFrequencyGame {
         return map;
     }
 
+
+    //convert for loop to stream
+    //extract method to:
+        //getResult
+        //getWordFrequencies
+        //getWordFrequencyList
 }
