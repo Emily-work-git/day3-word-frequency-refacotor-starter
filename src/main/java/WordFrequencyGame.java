@@ -21,10 +21,9 @@ public class WordFrequencyGame {
 
                 wordFrequencies =  wordToWordFrequencyMap.entrySet()
                         .stream()
-                        .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
+                        .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size())).
+                        sorted((word1, word2) -> word2.getWordCount() - word1.getWordCount())
                         .collect(Collectors.toList());
-
-                wordFrequencies.sort((word1, word2) -> word2.getWordCount() - word1.getWordCount());
 
                 StringJoiner joiner = new StringJoiner(LINE_BREAK);
                 wordFrequencies.stream().map(word -> word.getValue()+" "+word.getWordCount()).forEach(joiner::add);
